@@ -1,1 +1,23 @@
+import pandas as pd
+import pandas_profiling
+import numpy as np
 
+tabelas = ['variaveis']
+variaveis = pd.read_excel('Dados_-_novo.xlsx')
+print(variaveis)
+
+#substituir valores nulos dessa variável pela média (as outras fiz antes)
+variaveis["NRO_EMP"] = variaveis["NRO_EMP"].replace('0', 1.697)
+print(variaveis.isnull().sum())
+print(variaveis.shape)
+print(variaveis.info())
+pd.set_option('display.max_columns', 10)
+pd.options.display.float_format = '{:.3f}'.format
+print(variaveis.describe(include = 'all'))
+print(variaveis.columns)
+
+#exploratory data analysis - infos estatísticas
+prof = pandas_profiling.ProfileReport(df=variaveis)
+prof.to_file('vari_tester.html')
+
+#regressao (codigo ta no pycharm ainda)
