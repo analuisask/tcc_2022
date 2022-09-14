@@ -30,11 +30,16 @@ regressor.fit(x_train, y_train)
 y_pred = regressor.predict(x_test)
 print(y_pred)
 
-#avalia
+#avalia - r2
 Accuracy=r2_score(y_test,y_pred)*100
 print(Accuracy)
 
+#plot the results
 plt.scatter(y_test,y_pred);
 plt.xlabel('Actual');
 plt.ylabel('Predicted')
+plt.show()
+
+#regression plot
+plt.plot(X=y_test,Y=y_pred,ci=None,color ='red')
 plt.show()
