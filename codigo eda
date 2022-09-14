@@ -19,5 +19,3 @@ print(variaveis.columns)
 #exploratory data analysis - infos estatísticas
 prof = pandas_profiling.ProfileReport(df=variaveis)
 prof.to_file('vari_tester.html')
-
-#regressao (codigo ta no pycharm ainda)
