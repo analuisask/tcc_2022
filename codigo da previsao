@@ -1,0 +1,40 @@
+import pandas as pd
+import sklearn.model_selection as ms
+import sklearn.linear_model as lm
+from sklearn.metrics import r2_score
+import matplotlib.pyplot as plt
+
+tabelas = ['variaveis']
+variaveis = pd.read_excel('Dados - regressao sem_muni.xlsx')
+#substituir valores nulos dessa variável pela média
+variaveis["NRO_EMP"] = variaveis["NRO_EMP"].replace('0', 1.697)
+
+#define x(dependentes)e y(independente)
+x = variaveis.iloc[:, :-1]
+y = variaveis.iloc[:, 3].values
+
+#divide treino(20%) e teste(80%)
+x_train,x_test,y_train,y_test=ms.train_test_split(x,y,test_size=0.2,random_state=0)
+
+#shapes of splitted data
+print("x_train:",x_train.shape)
+print("x_test:",x_test.shape)
+print("y_train:",y_train.shape)
+print("y_test:",y_test.shape)
+
+#treinar o modelo
+regressor = lm.LinearRegression()
+regressor.fit(x_train, y_train)
+
+#previsao
+y_pred = regressor.predict(x_test)
+print(y_pred)
+
+#avalia
+Accuracy=r2_score(y_test,y_pred)*100
+print(Accuracy)
+
+plt.scatter(y_test,y_pred);
+plt.xlabel('Actual');
+plt.ylabel('Predicted')
+plt.show()
